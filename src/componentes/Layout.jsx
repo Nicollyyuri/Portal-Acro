@@ -76,7 +76,7 @@ const Layout = ({ children }) => (
                 pt: 8,
             }}
         >
-            {children}
+            <Outlet />
         </Box>
     </Box>
 );
