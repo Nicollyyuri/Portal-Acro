@@ -38,7 +38,7 @@ const App = () => {
 
           {/* 🌐 Páginas públicas com Layout padrão */}
           <Route path="/" element={<Layout />}>
-            <Route path="index" element={<IndexPage />} />
+            <Route index element={<IndexPage />} /> {/* Rota padrão corrigida */}
             <Route path="loginCliente" element={<LoginClientePage />} />
             <Route path="loginAdmin" element={<LoginAdminPage />} />
           </Route>

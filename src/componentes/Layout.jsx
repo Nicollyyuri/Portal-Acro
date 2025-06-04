@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Box, Button, Toolbar } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Outlet } from 'react-router-dom';
 
 const menuItems = [
     { text: 'Início', path: '/cliente/inicio' },
@@ -11,11 +11,11 @@ const menuItems = [
     { text: 'Sair', path: '/' },
 ];
 
-const Layout = ({ children }) => (
+const Layout = () => (
     <Box
         sx={{
             minHeight: '100vh',
-            background: 'linear-gradient(135deg, #1f2f34 0%, #010300 100%)', // fundo aplicado aqui
+            background: 'linear-gradient(135deg, #1f2f34 0%, #010300 100%)',
             display: 'flex',
             flexDirection: 'column',
             fontSize: '1.125rem',
@@ -68,15 +68,8 @@ const Layout = ({ children }) => (
             </Toolbar>
         </AppBar>
 
-        <Box
-            component="main"
-            sx={{
-                flexGrow: 1,
-                p: 4,
-                pt: 8,
-            }}
-        >
-            {children}
+        <Box component="main" sx={{ flexGrow: 1, p: 4, pt: 8 }}>
+            <Outlet />
         </Box>
     </Box>
 );
