@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Box, Button, Toolbar } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const menuItems = [
     { text: 'Início', path: '/cliente/inicio' },
