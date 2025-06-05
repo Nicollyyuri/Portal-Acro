@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, List, ListItem, ListItemText } from '@mui/material';
-import { Outlet, Link as RouterLink } from 'react-router-dom';
+import { Box, Button } from '@mui/material';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 const adminMenuItems = [
-    { text: 'Painel', path: '/admin/dashboard' },
+    { text: 'Início', path: '/admin/dashboard' },
     { text: 'Usuários', path: '/admin/usuarios' },
     { text: 'Cadastrar Usuário', path: '/admin/usuarios/novo' },
     { text: 'Portal', path: '/admin/portal' },
@@ -13,55 +13,71 @@ const adminMenuItems = [
     { text: 'Sair', path: '/' },
 ];
 
-const LayoutAdmin = () => {
+const LayoutAdmin = ({ children }) => {
+    const navigate = useNavigate();
+
     return (
         <Box
             sx={{
                 display: 'flex',
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #1f2f34 0%, #010300 100%)',
+                fontSize: '1.125rem',
+                letterSpacing: '0.5px',
                 color: '#F7F8FC',
             }}
         >
-            {/* Menu Lateral */}
+            {/* Menu lateral */}
             <Box
                 sx={{
-                    width: 240,
+                    width: 260,
                     backgroundColor: '#1f2f34',
                     borderRight: '1px solid #314C53',
-                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    py: 3,
                 }}
             >
-                <Box sx={{ textAlign: 'center', mb: 3 }}>
-                    <img
-                        src="/imagens/logo-acro.png"
-                        alt="Logo ACRO"
-                        style={{ maxWidth: 160 }}
-                    />
-                </Box>
-                <List>
-                    {adminMenuItems.map((item) => (
-                        <ListItem
-                            key={item.text}
-                            button
-                            component={RouterLink}
-                            to={item.path}
-                            sx={{
-                                color: '#F7F8FC',
-                                '&:hover': {
-                                    backgroundColor: '#314C53',
-                                },
-                            }}
-                        >
-                            <ListItemText primary={item.text} />
-                        </ListItem>
-                    ))}
-                </List>
+                <Box
+                    component="img"
+                    src="/imagens/logo-acro.png"
+                    alt="Logo ACRO"
+                    onClick={() => navigate('/admin/dashboard')}
+                    sx={{
+                        height: 70,
+                        cursor: 'pointer',
+                        mb: 4,
+                    }}
+                />
+
+                {adminMenuItems.map((item) => (
+                    <Button
+                        key={item.text}
+                        component={RouterLink}
+                        to={item.path}
+                        color="inherit"
+                        sx={{
+                            justifyContent: 'flex-start',
+                            width: '90%',
+                            mb: 1,
+                            fontSize: '1.1rem',
+                            color: '#F7F8FC',
+                            textTransform: 'none',
+                            px: 2,
+                            '&:hover': {
+                                backgroundColor: '#314C53',
+                            },
+                        }}
+                    >
+                        {item.text}
+                    </Button>
+                ))}
             </Box>
 
-            {/* Conteúdo da Rota Atual */}
-            <Box sx={{ flexGrow: 1, p: 4 }}>
-                <Outlet />
+            {/* Conteúdo da página atual */}
+            <Box sx={{ flexGrow: 1, p: 3 }}>
+                {children}
             </Box>
         </Box>
     );

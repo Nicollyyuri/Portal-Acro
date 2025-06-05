@@ -6,14 +6,16 @@ const LoginAdminPage = () => {
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
+    const [erroLogin, setErroLogin] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
 
-        if (usuario === 'admin' && senha === '123') {
+        if (usuario.trim() === 'admin' && senha.trim() === '123') {
+            setErroLogin(false);
             navigate('/admin/dashboard');
         } else {
-            alert('Usuário ou senha inválidos');
+            setErroLogin(true);
         }
     };
 
@@ -38,11 +40,11 @@ const LoginAdminPage = () => {
                     textAlign: 'center',
                 }}
             >
-                {/* Logo */}
-                <img
+                <Box
+                    component="img"
                     src="/imagens/logo-acro.png"
                     alt="Logo ACRO"
-                    style={{ width: '70%', marginBottom: 16 }}
+                    sx={{ width: '70%', mb: 2 }}
                 />
 
                 {/* Título e Descrição */}
@@ -58,19 +60,26 @@ const LoginAdminPage = () => {
                     <TextField
                         fullWidth
                         label="Usuário"
+                        autoComplete="username"
+                        inputProps={{ 'aria-label': 'usuário' }}
                         value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         margin="normal"
                         required
+                        error={erroLogin}
                     />
                     <TextField
                         fullWidth
                         label="Senha"
                         type="password"
+                        autoComplete="current-password"
+                        inputProps={{ 'aria-label': 'senha' }}
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
                         margin="normal"
                         required
+                        error={erroLogin}
+                        helperText={erroLogin ? 'Usuário ou senha inválidos' : ''}
                     />
 
                     <Button

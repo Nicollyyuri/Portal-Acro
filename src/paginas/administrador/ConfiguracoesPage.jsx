@@ -5,26 +5,23 @@ const ConfiguracoesPage = () => {
     return (
         <Box
             sx={{
-                minHeight: '80vh',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
                 textAlign: 'center',
-                px: 3,
+                mt: 10,
             }}
         >
-            <Box>
-                <img src="/imagens/em-breve.png" alt="Em breve" sx={{ width: 200, mb: 3 }}/>
-            </Box>
-
-            <Typography variant="h4" fontWeight="bold" gutterBottom>
-                Configurações em Breve
+            <Typography variant="h4" gutterBottom color="text.primary" fontWeight="bold" sx={{ mb: 5 }}>
+                Página de Configurações
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" maxWidth={500}>
-                Esta seção está em fase de desenvolvimento. Em breve você poderá ajustar
-                preferências, segurança e personalizações do sistema.
+            <Box
+                component="img"
+                src="/imagens/em-breve.png"
+                alt="Página em construção"
+                sx={{ maxWidth: 500, mb: 3 }}
+            />
+
+            <Typography variant="h6" color="text.secondary">
+                Esta funcionalidade estará disponível em breve.
             </Typography>
         </Box>
     );

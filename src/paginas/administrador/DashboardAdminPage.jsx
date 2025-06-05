@@ -21,8 +21,8 @@ const DashboardAdminPage = () => {
                 component="img"
                 src="/imagens/logo-acro.png"
                 alt="Logo ACRO"
-                onClick={() => navigate('/')}
-                sx={{ maxWidth: 160, mb: 4, cursor: 'pointer' }}
+                onClick={() => navigate('/admin/dashboard')}
+                sx={{ maxWidth: 500, mb: 4, cursor: 'pointer' }}
             />
 
             <Typography

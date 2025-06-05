@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material'; 
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import TemaProjeto from './tema/TemaProjeto';
 
 // Páginas públicas
@@ -16,6 +16,7 @@ import AssistenciaPage from './paginas/cliente/AssistenciaPage';
 import DocumentosPage from './paginas/cliente/DocumentosPage';
 
 // Admin
+import LayoutAdmin from './componentes/LayoutAdmin';
 import DashboardAdminPage from './paginas/administrador/DashboardAdminPage';
 import UsuariosAdminPage from './paginas/administrador/UsuariosAdminPage';
 import CadastrarUsuarioPage from './paginas/administrador/CadastrarUsuarioPage';
@@ -45,13 +46,49 @@ const App = () => {
           <Route path="/cliente/documentos" element={<DocumentosPage />} />
 
           {/* 🔒 Admin */}
-          <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
-          <Route path="/admin/usuarios" element={<UsuariosAdminPage />} />
-          <Route path="/admin/usuarios/novo" element={<CadastrarUsuarioPage />} />
-          <Route path="/admin/portal" element={<AdminUsuarios />} />
-          <Route path="/admin/formulario" element={<UsuarioForm />} />
-          <Route path="/admin/relatorios" element={<RelatoriosPage />} />
-          <Route path="/admin/configuracoes" element={<ConfiguracoesPage />} />
+
+          <Route path="/admin/dashboard" element={
+            <LayoutAdmin>
+              <DashboardAdminPage />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/usuarios" element={
+            <LayoutAdmin>
+              <UsuariosAdminPage />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/usuarios/novo" element={
+            <LayoutAdmin>
+              <CadastrarUsuarioPage />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/portal" element={
+            <LayoutAdmin>
+              <AdminUsuarios />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/formulario" element={
+            <LayoutAdmin>
+              <UsuarioForm />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/relatorios" element={
+            <LayoutAdmin>
+              <RelatoriosPage />
+            </LayoutAdmin>
+          } />
+
+          <Route path="/admin/configuracoes" element={
+            <LayoutAdmin>
+              <ConfiguracoesPage />
+            </LayoutAdmin>
+          } />
+
         </Routes>
       </Router>
     </ThemeProvider>

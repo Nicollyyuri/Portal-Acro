@@ -1,35 +1,20 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Grid } from '@mui/material';
-import LayoutAdmin from '../componentes/LayoutAdmin';
-
-const validarCPF = (cpf) => {
-    cpf = cpf.replace(/[^\d]+/g, '');
-    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-
-    let soma = 0;
-    for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
-    let resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(9))) return false;
-
-    soma = 0;
-    for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    return resto === parseInt(cpf.charAt(10));
-};
+import {
+    Box, TextField, Button, Typography, Grid, Paper, Divider, InputAdornment
+} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HomeIcon from '@mui/icons-material/Home';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import NumbersIcon from '@mui/icons-material/Numbers';
 
 const CadastrarUsuarioPage = () => {
     const [formData, setFormData] = useState({
-        nome: '',
-        cpf: '',
-        data_nascimento: '',
-        email: '',
-        telefone: '',
-        cep: '',
-        rua: '',
-        bairro: '',
-        numero: '',
+        nome: '', cpf: '', data_nascimento: '', email: '', telefone: '',
+        cep: '', rua: '', bairro: '', numero: '',
     });
 
     const handleChange = (e) => {
@@ -59,12 +44,13 @@ const CadastrarUsuarioPage = () => {
         }
     };
 
-    const handleSubmit = async () => {
-        if (!validarCPF(formData.cpf)) {
-            alert('CPF inválido!');
-            return;
-        }
+    const formatDateToYMD = (dateStr) => {
+        const date = new Date(dateStr);
+        if (isNaN(date)) return '';
+        return `${date.getFullYear()}-${(`0${date.getMonth() + 1}`).slice(-2)}-${(`0${date.getDate()}`).slice(-2)}`;
+    };
 
+    const handleSubmit = async () => {
         const camposObrigatorios = ['nome', 'cpf', 'data_nascimento', 'email', 'telefone', 'numero'];
         for (let campo of camposObrigatorios) {
             if (!formData[campo]) {
@@ -73,47 +59,26 @@ const CadastrarUsuarioPage = () => {
             }
         }
 
-            const formatDateToYMD = (dateStr) => {
-        const date = new Date(dateStr);
-        if (isNaN(date)) return '';
-        const year = date.getFullYear();
-        const month = (`0${date.getMonth() + 1}`).slice(-2);
-        const day = (`0${date.getDate()}`).slice(-2);
-        return `${year}-${month}-${day}`;
-    };
-
-    const payload = {
-        ...formData,
-        data_nascimento: formatDateToYMD(formData.data_nascimento),
-    };
+        const payload = {
+            ...formData,
+            data_nascimento: formatDateToYMD(formData.data_nascimento),
+        };
 
         try {
             const response = await fetch('http://localhost:3030/api/customers', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             });
 
-            if (!response.ok) {
-                throw new Error(`Erro: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`Erro: ${response.status}`);
 
             const result = await response.json();
-
             alert(`Usuário cadastrado com sucesso!\n\n${JSON.stringify(result, null, 2)}`);
 
             setFormData({
-                nome: '',
-                cpf: '',
-                data_nascimento: '',
-                email: '',
-                telefone: '',
-                cep: '',
-                rua: '',
-                bairro: '',
-                numero: '',
+                nome: '', cpf: '', data_nascimento: '', email: '', telefone: '',
+                cep: '', rua: '', bairro: '', numero: '',
             });
 
         } catch (error) {
@@ -123,55 +88,184 @@ const CadastrarUsuarioPage = () => {
     };
 
     return (
-        <LayoutAdmin>
-            <Box sx={{ maxWidth: 700, mx: 'auto', p: 4 }}>
-                <Typography variant="h4" gutterBottom fontWeight="bold">
+        <Box
+            sx={{
+                minHeight: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                p: 3,
+            }}
+        >
+            <Paper elevation={6} sx={{
+                p: 5,
+                maxWidth: 1000,
+                width: '100%',
+                borderRadius: 3,
+            }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" textAlign="center">
                     Cadastrar Novo Usuário
                 </Typography>
 
+                <Divider sx={{ my: 3 }} />
+
+                {/* Dados Pessoais */}
+                <Typography variant="h6" gutterBottom>
+                    Dados Pessoais
+                </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="Nome" name="nome" value={formData.nome} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="CPF" name="cpf" value={formData.cpf} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
                         <TextField
-                            fullWidth
-                            type="date"
-                            label="Data de Nascimento"
-                            name="data_nascimento"
-                            value={formData.data_nascimento}
-                            onChange={handleChange}
-                            InputLabelProps={{ shrink: true }}
+                            fullWidth label="Nome" name="nome" value={formData.nome} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="E-mail" name="email" value={formData.email} onChange={handleChange} />
+                        <TextField
+                            fullWidth label="CPF" name="cpf" value={formData.cpf} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <CreditCardIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="Telefone" name="telefone" value={formData.telefone} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField fullWidth label="CEP" name="cep" value={formData.cep} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={8}>
-                        <TextField fullWidth label="Rua" name="rua" value={formData.rua} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="Bairro" name="bairro" value={formData.bairro} onChange={handleChange} />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="Número" name="numero" value={formData.numero} onChange={handleChange} />
+                        <TextField
+                            fullWidth type="date" label="Data de Nascimento" name="data_nascimento"
+                            value={formData.data_nascimento} onChange={handleChange}
+                            InputLabelProps={{ shrink: true, sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <CalendarTodayIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
                     </Grid>
                 </Grid>
 
-                <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 3 }}>
-                    Cadastrar
-                </Button>
-            </Box>
-        </LayoutAdmin>
+                <Divider sx={{ my: 3 }} />
+
+                {/* Contato */}
+                <Typography variant="h6" gutterBottom>
+                    Contato
+                </Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="E-mail" name="email" value={formData.email} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <EmailIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="Telefone" name="telefone" value={formData.telefone} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PhoneIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                </Grid>
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Endereço */}
+                <Typography variant="h6" gutterBottom>
+                    Endereço
+                </Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="CEP" name="cep" value={formData.cep} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LocationOnIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="Rua" name="rua" value={formData.rua} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <HomeIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="Bairro" name="bairro" value={formData.bairro} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth label="Número" name="numero" value={formData.numero} onChange={handleChange}
+                            InputLabelProps={{ sx: { fontSize: 16 } }}
+                            inputProps={{ style: { fontSize: 16 } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <NumbersIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                </Grid>
+
+                <Box sx={{ textAlign: 'right', mt: 4 }}>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        sx={{ px: 4, py: 1.5, fontSize: '1rem' }}
+                        onClick={handleSubmit}
+                    >
+                        Cadastrar
+                    </Button>
+                </Box>
+            </Paper>
+        </Box>
     );
 };
 
