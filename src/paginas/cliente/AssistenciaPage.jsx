@@ -7,7 +7,9 @@ import {
     Paper,
     Alert,
     Snackbar,
+    Divider,
 } from '@mui/material';
+import { HelpOutline } from '@mui/icons-material';
 import LayoutCliente from '../../componentes/LayoutCliente';
 
 const AssistenciaPage = () => {
@@ -18,13 +20,11 @@ const AssistenciaPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Validação simples
         if (!titulo.trim() || !descricao.trim()) {
             alert('Preencha todos os campos antes de enviar.');
             return;
         }
 
-        // Simular envio
         setSuccess(true);
         setTitulo('');
         setDescricao('');
@@ -32,17 +32,30 @@ const AssistenciaPage = () => {
 
     return (
         <LayoutCliente>
-            <Box sx={{ maxWidth: 700, mx: 'auto', py: 4, px: 2 }}>
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    fontWeight="bold"
-                    textAlign="center"
+            <Box sx={{ maxWidth: 700, mx: 'auto', py: 5, px: 3, mt: 13 }}>
+                <Paper
+                    elevation={6}
+                    sx={{
+                        p: { xs: 3, md: 4 },
+                        borderRadius: 3,
+                        backgroundColor: 'primary',
+                    }}
                 >
-                    Solicitação de Assistência
-                </Typography>
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        mb={3}
+                        gap={1}
+                    >
+                        <Typography variant="h4" fontWeight="bold" textAlign="center">
+                            Solicitação de Assistência
+                        </Typography>
+                        <HelpOutline color="text.primary" fontSize="large" />
+                    </Box>
 
-                <Paper elevation={4} sx={{ p: 4 }}>
+                    <Divider sx={{ mb: 3 }} />
+
                     <form onSubmit={handleSubmit}>
                         <TextField
                             fullWidth
@@ -51,6 +64,7 @@ const AssistenciaPage = () => {
                             margin="normal"
                             value={titulo}
                             onChange={(e) => setTitulo(e.target.value)}
+                            required
                         />
 
                         <TextField
@@ -62,6 +76,7 @@ const AssistenciaPage = () => {
                             margin="normal"
                             value={descricao}
                             onChange={(e) => setDescricao(e.target.value)}
+                            required
                         />
 
                         <Button
@@ -71,9 +86,11 @@ const AssistenciaPage = () => {
                             fullWidth
                             sx={{
                                 mt: 3,
-                                py: 1.2,
-                                fontSize: '1rem',
+                                py: 1.4,
+                                fontSize: '1.05rem',
                                 fontWeight: 'bold',
+                                textTransform: 'none',
+                                borderRadius: 2,
                             }}
                         >
                             Enviar Solicitação
@@ -87,7 +104,11 @@ const AssistenciaPage = () => {
                     onClose={() => setSuccess(false)}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 >
-                    <Alert severity="success" onClose={() => setSuccess(false)}>
+                    <Alert
+                        severity="success"
+                        onClose={() => setSuccess(false)}
+                        sx={{ fontSize: '1.5rem' }}
+                    >
                         Solicitação enviada com sucesso!
                     </Alert>
                 </Snackbar>

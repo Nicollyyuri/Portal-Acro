@@ -1,18 +1,20 @@
 import React from 'react';
 import { AppBar, Toolbar, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const menuItems = [
     { text: 'Início', path: '/cliente/inicio' },
     { text: 'Boletos', path: '/cliente/boletos' },
+    { text: 'Documentos', path: '/cliente/documentos' },
     { text: 'Obras', path: '/cliente/obras' },
     { text: 'Assistência', path: '/cliente/assistencia' },
-    { text: 'Documentos', path: '/cliente/documentos' },
     { text: 'Sair', path: '/' },
 ];
 
 const LayoutCliente = ({ children }) => {
+    const navigate = useNavigate();
+
     return (
         <Box
             sx={{
@@ -33,8 +35,9 @@ const LayoutCliente = ({ children }) => {
                         alt="Logo ACRO"
                         onClick={() => navigate('/cliente/inicio')}
                         sx={{
-                            height: 160,
-                            mb: 4,
+                            mt: 1,
+                            height: 70,
+                            mb: 1,
                             cursor: 'pointer'
                         }}
                     />

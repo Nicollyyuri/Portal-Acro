@@ -7,7 +7,6 @@ import TemaProjeto from './tema/TemaProjeto';
 import IndexPage from './paginas/publico/IndexPage';
 import LoginClientePage from './paginas/publico/LoginClientePage';
 import LoginAdminPage from './paginas/publico/LoginAdminPage';
-import EmBreve from './componentes/EmBreve';
 
 // Cliente
 import InicioClientePage from './paginas/cliente/InicioClientePage';
@@ -37,7 +36,6 @@ const App = () => {
           {/* 🌐 Páginas */}
           <Route path="/loginCliente" element={<LoginClientePage />} />
           <Route path="/loginAdmin" element={<LoginAdminPage />} />
-          <Route path="/embreve" element={<EmBreve />} />
 
           {/* 👤 Cliente */}
           <Route path="/cliente/inicio" element={<InicioClientePage />} />
