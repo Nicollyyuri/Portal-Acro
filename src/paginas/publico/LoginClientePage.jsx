@@ -13,14 +13,16 @@ const LoginClientePage = () => {
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
+    const [erroLogin, setErroLogin] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
 
-        if (usuario === 'cliente' && senha === '123') {
-            navigate('/dashboard');
+        if (usuario.trim() === 'cliente' && senha.trim() === '123') {
+            setErroLogin(false);
+            navigate('/cliente/inicio');
         } else {
-            alert('Usuário ou senha inválidos');
+            setErroLogin(true);
         }
     };
 
@@ -45,10 +47,11 @@ const LoginClientePage = () => {
                     textAlign: 'center',
                 }}
             >
-                <img
+                <Box
+                    component="img"
                     src="/imagens/logo-acro.png"
                     alt="Logo ACRO"
-                    style={{ width: '70%', marginBottom: 16 }}
+                    sx={{ width: '70%', mb: 2 }}
                 />
 
                 <Typography variant="h5" gutterBottom>
@@ -62,19 +65,26 @@ const LoginClientePage = () => {
                     <TextField
                         fullWidth
                         label="Usuário"
+                        autoComplete="username"
+                        inputProps={{ 'aria-label': 'usuário' }}
                         value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         margin="normal"
                         required
+                        error={erroLogin}
                     />
                     <TextField
                         fullWidth
                         label="Senha"
                         type="password"
+                        autoComplete="current-password"
+                        inputProps={{ 'aria-label': 'senha' }}
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
                         margin="normal"
                         required
+                        error={erroLogin}
+                        helperText={erroLogin ? 'Usuário ou senha inválidos' : ''}
                     />
                     <Button
                         type="submit"
@@ -94,10 +104,22 @@ const LoginClientePage = () => {
                         width: '100%'
                     }}
                 >
-                    <Link href="#" underline="none" color="text.secondary" sx={{ fontSize: '0.9rem' }}>
+                    <Link
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        underline="none"
+                        color="text.secondary"
+                        sx={{ fontSize: '0.9rem' }}
+                    >
                         Primeiro acesso?
                     </Link>
-                    <Link href="#" underline="none" color="text.secondary" sx={{ fontSize: '0.9rem' }}>
+                    <Link
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        underline="none"
+                        color="text.secondary"
+                        sx={{ fontSize: '0.9rem' }}
+                    >
                         Esqueceu a senha?
                     </Link>
                 </Box>

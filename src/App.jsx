@@ -1,17 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-
+import { ThemeProvider, CssBaseline } from '@mui/material'; 
 import TemaProjeto from './tema/TemaProjeto';
-
-// Layouts
-import Layout from './componentes/Layout';           // Layout geral (público/cliente)
-import LayoutAdmin from './componentes/LayoutAdmin'; // Layout admin
 
 // Páginas públicas
 import IndexPage from './paginas/publico/IndexPage';
 import LoginClientePage from './paginas/publico/LoginClientePage';
 import LoginAdminPage from './paginas/publico/LoginAdminPage';
+import EmBreve from './componentes/EmBreve';
 
 // Cliente
 import InicioClientePage from './paginas/cliente/InicioClientePage';
@@ -35,34 +31,29 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Routes>
+          {/* 🌐 Página Inicial */}
+          <Route path="/" element={<IndexPage />} />
 
-          {/* 🌐 Páginas públicas com Layout padrão */}
-          <Route path="/" element={<Layout />}>
-            <Route index element={<IndexPage />} />
-            <Route path="loginCliente" element={<LoginClientePage />} />
-            <Route path="loginAdmin" element={<LoginAdminPage />} />
-          </Route>
+          {/* 🌐 Páginas */}
+          <Route path="/loginCliente" element={<LoginClientePage />} />
+          <Route path="/loginAdmin" element={<LoginAdminPage />} />
+          <Route path="/embreve" element={<EmBreve />} />
 
           {/* 👤 Cliente */}
-          <Route path="/cliente" element={<Layout />}>
-            <Route path="inicio" element={<InicioClientePage />} />
-            <Route path="boletos" element={<BoletosPage />} />
-            <Route path="obras" element={<ObrasPage />} />
-            <Route path="assistencia" element={<AssistenciaPage />} />
-            <Route path="documentos" element={<DocumentosPage />} />
-          </Route>
+          <Route path="/cliente/inicio" element={<InicioClientePage />} />
+          <Route path="/cliente/boletos" element={<BoletosPage />} />
+          <Route path="/cliente/obras" element={<ObrasPage />} />
+          <Route path="/cliente/assistencia" element={<AssistenciaPage />} />
+          <Route path="/cliente/documentos" element={<DocumentosPage />} />
 
           {/* 🔒 Admin */}
-          <Route path="/admin" element={<LayoutAdmin />}>
-            <Route path="dashboard" element={<DashboardAdminPage />} />
-            <Route path="usuarios" element={<UsuariosAdminPage />} />
-            <Route path="usuarios/novo" element={<CadastrarUsuarioPage />} />
-            <Route path="portal" element={<AdminUsuarios />} />
-            <Route path="formulario" element={<UsuarioForm />} />
-            <Route path="relatorios" element={<RelatoriosPage />} />
-            <Route path="configuracoes" element={<ConfiguracoesPage />} />
-          </Route>
-
+          <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
+          <Route path="/admin/usuarios" element={<UsuariosAdminPage />} />
+          <Route path="/admin/usuarios/novo" element={<CadastrarUsuarioPage />} />
+          <Route path="/admin/portal" element={<AdminUsuarios />} />
+          <Route path="/admin/formulario" element={<UsuarioForm />} />
+          <Route path="/admin/relatorios" element={<RelatoriosPage />} />
+          <Route path="/admin/configuracoes" element={<ConfiguracoesPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

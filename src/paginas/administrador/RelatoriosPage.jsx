@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import emBreveImg from '../../assets/em-breve.png'; // ajuste se estiver em outra pasta
 
 const RelatoriosPage = () => {
     return (
@@ -15,12 +14,9 @@ const RelatoriosPage = () => {
                 px: 3,
             }}
         >
-            <Box
-                component="img"
-                src={emBreveImg}
-                alt="Em construção"
-                sx={{ width: 200, mb: 3 }}
-            />
+            <Box>
+                <img src="/imagens/em-breve.png" alt="Em breve" sx={{ width: 200, mb: 3 }} />
+            </Box>
 
             <Typography variant="h4" fontWeight="bold" gutterBottom>
                 Relatórios em Breve

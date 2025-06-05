@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
-import Layout from '../../componentes/Layout';
+import Layout from '../../componentes/LayoutCliente';
 
 const documentos = [
     { id: 1, nome: 'Contrato de Compra e Venda', status: 'Assinado' },

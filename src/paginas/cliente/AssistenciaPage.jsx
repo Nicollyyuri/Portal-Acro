@@ -1,42 +1,98 @@
-import React from 'react';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
-import Layout from '../../componentes/Layout';
+import React, { useState } from 'react';
+import {
+    Box,
+    Typography,
+    TextField,
+    Button,
+    Paper,
+    Alert,
+    Snackbar,
+} from '@mui/material';
+import LayoutCliente from '../../componentes/LayoutCliente';
 
 const AssistenciaPage = () => {
+    const [titulo, setTitulo] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Validação simples
+        if (!titulo.trim() || !descricao.trim()) {
+            alert('Preencha todos os campos antes de enviar.');
+            return;
+        }
+
+        // Simular envio
+        setSuccess(true);
+        setTitulo('');
+        setDescricao('');
+    };
+
     return (
-        <Layout>
-            <Box sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
-                <Typography variant="h4" gutterBottom fontWeight="bold">
+        <LayoutCliente>
+            <Box sx={{ maxWidth: 700, mx: 'auto', py: 4, px: 2 }}>
+                <Typography
+                    variant="h4"
+                    gutterBottom
+                    fontWeight="bold"
+                    textAlign="center"
+                >
                     Solicitação de Assistência
                 </Typography>
 
-                <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
-                    <TextField
-                        fullWidth
-                        label="Título do Problema"
-                        name="titulo"
-                        margin="normal"
-                    />
+                <Paper elevation={4} sx={{ p: 4 }}>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            fullWidth
+                            label="Título do Problema"
+                            name="titulo"
+                            margin="normal"
+                            value={titulo}
+                            onChange={(e) => setTitulo(e.target.value)}
+                        />
 
-                    <TextField
-                        fullWidth
-                        label="Descrição detalhada"
-                        name="descricao"
-                        multiline
-                        rows={4}
-                        margin="normal"
-                    />
+                        <TextField
+                            fullWidth
+                            label="Descrição detalhada"
+                            name="descricao"
+                            multiline
+                            rows={5}
+                            margin="normal"
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
+                        />
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ mt: 2 }}
-                    >
-                        Enviar Solicitação
-                    </Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            sx={{
+                                mt: 3,
+                                py: 1.2,
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            Enviar Solicitação
+                        </Button>
+                    </form>
                 </Paper>
+
+                <Snackbar
+                    open={success}
+                    autoHideDuration={4000}
+                    onClose={() => setSuccess(false)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                >
+                    <Alert severity="success" onClose={() => setSuccess(false)}>
+                        Solicitação enviada com sucesso!
+                    </Alert>
+                </Snackbar>
             </Box>
-        </Layout>
+        </LayoutCliente>
     );
 };
 

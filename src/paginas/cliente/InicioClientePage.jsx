@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../../componentes/Layout';
+import LayoutCliente from '../../componentes/LayoutCliente.jsx';
 
-const DashboardClientePage = () => {
+const InicioClientePage = () => {
     const navigate = useNavigate();
 
     return (
-        <Layout>
+        <LayoutCliente>
             <Box
                 sx={{
                     position: 'relative',
@@ -21,14 +21,20 @@ const DashboardClientePage = () => {
                     textAlign: 'center',
                 }}
             >
+                {/* Logo clicável */}
                 <Box
                     component="img"
                     src="/imagens/logo-acro.png"
                     alt="Logo ACRO"
-                    onClick={() => navigate('/dashboard')}
-                    sx={{ maxWidth: 160, mb: 4, cursor: 'pointer' }}
+                    onClick={() => navigate('/cliente/inicio')}
+                    sx={{
+                        height: 160,
+                        mb: 4,
+                        cursor: 'pointer'
+                    }}
                 />
 
+                {/* Título principal */}
                 <Typography
                     variant="h3"
                     component="h1"
@@ -36,21 +42,21 @@ const DashboardClientePage = () => {
                     color="text.primary"
                     sx={{ fontWeight: 'bold', letterSpacing: 1 }}
                 >
-                    <br />
                     Bem-vindo ao portal
                 </Typography>
 
+                {/* Texto informativo */}
                 <Typography
                     variant="h6"
                     color="text.secondary"
-                    sx={{ maxWidth: 700 }}
+                    sx={{ maxWidth: 700, textAlign: 'center', px: 2 }}
                 >
                     Aqui você consegue acompanhar boletos, andamento de obras,
                     documentos e muito mais.
                 </Typography>
             </Box>
-        </Layout>
+        </LayoutCliente>
     );
 };
 
-export default DashboardClientePage;
+export default InicioClientePage;

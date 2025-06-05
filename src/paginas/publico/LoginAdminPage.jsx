@@ -10,7 +10,6 @@ const LoginAdminPage = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        // Simulação simples de autenticação
         if (usuario === 'admin' && senha === '123') {
             navigate('/admin/dashboard');
         } else {
