@@ -28,7 +28,7 @@ const documentos = [
         id: 3,
         nome: 'Declaração de Quitação',
         status: 'Pendente',
-        url: '/docs/quitacao_acro_pendente.pdf',
+        url: '/docs/Quitacao.pdf',
     },
 ];
 
