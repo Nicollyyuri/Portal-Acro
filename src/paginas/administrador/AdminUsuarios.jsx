@@ -23,42 +23,18 @@ const usuarios = Array.from({ length: 50 }, (_, i) => ({
 const AdminUsuarios = () => {
     return (
         <Box sx={{ display: 'flex', height: '100vh' }}>
-            {/* SIDEBAR */}
-            <Box
-                sx={{
-                    width: 240,
-                    backgroundColor: '#263238',
-                    color: '#fff',
-                    p: 2,
-                    overflowY: 'auto',
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                <Typography variant="h6" gutterBottom>
-                    Menu Admin
-                </Typography>
-                <Divider sx={{ mb: 2, backgroundColor: '#455A64' }} />
-
-                {/* Simulação de muitos itens no menu */}
-                {Array.from({ length: 30 }, (_, i) => (
-                    <Typography
-                        key={i}
-                        variant="body2"
-                        sx={{
-                            mb: 1,
-                            cursor: 'pointer',
-                            '&:hover': { textDecoration: 'underline' },
-                        }}
-                    >
-                        Cliente {i + 1}
-                    </Typography>
-                ))}
-            </Box>
 
             {/* CONTEÚDO PRINCIPAL */}
-            <Box sx={{ flexGrow: 1, p: 3, overflowY: 'auto' }}>
-                <Typography variant="h4" gutterBottom>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    overflowY: 'auto',
+                    maxHeight: '100vh', // Adicione isso
+                    backgroundColor: '#102324', // opcional para melhor visual
+                }}
+            >
+                <Typography variant="h4" gutterBottom sx={{ color: 'white' }}>
                     Usuários Cadastrados
                 </Typography>
 
