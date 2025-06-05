@@ -14,6 +14,7 @@ import BoletosPage from './paginas/cliente/BoletosPage';
 import ObrasPage from './paginas/cliente/ObrasPage';
 import AssistenciaPage from './paginas/cliente/AssistenciaPage';
 import DocumentosPage from './paginas/cliente/DocumentosPage';
+import CompensacaoAmbientalPage from './paginas/cliente/CompensacaoAmbientalPage';
 
 // Admin
 import LayoutAdmin from './componentes/LayoutAdmin';
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/cliente/obras" element={<ObrasPage />} />
           <Route path="/cliente/assistencia" element={<AssistenciaPage />} />
           <Route path="/cliente/documentos" element={<DocumentosPage />} />
+          <Route path="/cliente/compensacao-ambiental" element={<CompensacaoAmbientalPage />} />
 
           {/* 🔒 Admin */}
 

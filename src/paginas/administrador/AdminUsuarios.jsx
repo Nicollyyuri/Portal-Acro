@@ -15,14 +15,24 @@ import {
 const usuarios = [
     { id: 1, nome: 'João Admin', email: 'joao@acro.com' },
     { id: 2, nome: 'Maria Gestora', email: 'maria@acro.com' },
+    // Você pode adicionar mais para testar a rolagem
 ];
 
 const AdminUsuarios = () => {
     return (
-        <Box p={2}>
+        <Box
+            sx={{
+                height: '100vh',         // Altura total da viewport
+                overflowY: 'auto',       // Habilita rolagem vertical se necessário
+                px: 3,
+                py: 4,
+                backgroundColor: '#f7f7f7',
+            }}
+        >
             <Typography variant="h4" gutterBottom>
                 Usuários Cadastrados
             </Typography>
+
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>

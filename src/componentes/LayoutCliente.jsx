@@ -8,6 +8,7 @@ const menuItems = [
     { text: 'Boletos', path: '/cliente/boletos' },
     { text: 'Documentos', path: '/cliente/documentos' },
     { text: 'Obras', path: '/cliente/obras' },
+    { text: 'Compensação Ambiental', path: '/cliente/compensacao-ambiental' },
     { text: 'Assistência', path: '/cliente/assistencia' },
     { text: 'Sair', path: '/' },
 ];
