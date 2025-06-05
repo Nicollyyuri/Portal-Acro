@@ -32,7 +32,7 @@ const AssistenciaPage = () => {
 
     return (
         <LayoutCliente>
-            <Box sx={{ maxWidth: 700, mx: 'auto', py: 5, px: 3, mt: 13 }}>
+            <Box sx={{ maxWidth: 770, mx: 'auto', py: 5, px: 3, mt: 13 }}>
                 <Paper
                     elevation={6}
                     sx={{

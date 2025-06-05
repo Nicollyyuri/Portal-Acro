@@ -8,7 +8,6 @@ import {
     Button,
     Chip,
     Paper,
-    Stack,
 } from '@mui/material';
 import Layout from '../../componentes/LayoutCliente';
 
