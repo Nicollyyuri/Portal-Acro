@@ -10,8 +10,8 @@ import {
     TableBody,
     Paper,
     Button,
-    Divider
 } from '@mui/material';
+
 
 // Simula muitos usuários para teste
 const usuarios = Array.from({ length: 50 }, (_, i) => ({
