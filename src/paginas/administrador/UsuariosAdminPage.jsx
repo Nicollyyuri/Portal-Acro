@@ -192,7 +192,6 @@ const UsuariosAdminPage = () => {
             {snackbar.message}
         </Alert>
     </Snackbar>
-
 };
 
 export default UsuariosAdminPage;

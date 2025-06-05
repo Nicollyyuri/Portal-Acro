@@ -18,10 +18,10 @@ import DocumentosPage from './paginas/cliente/DocumentosPage';
 // Admin
 import LayoutAdmin from './componentes/LayoutAdmin';
 import DashboardAdminPage from './paginas/administrador/DashboardAdminPage';
+import GerenciarDocumentosPage from './paginas/administrador/GerenciarDocumentosPage';
 import UsuariosAdminPage from './paginas/administrador/UsuariosAdminPage';
 import CadastrarUsuarioPage from './paginas/administrador/CadastrarUsuarioPage';
 import AdminUsuarios from './paginas/administrador/AdminUsuarios';
-import UsuarioForm from './componentes/UsuarioForm';
 import RelatoriosPage from './paginas/administrador/RelatoriosPage';
 import ConfiguracoesPage from './paginas/administrador/ConfiguracoesPage';
 
@@ -53,6 +53,12 @@ const App = () => {
             </LayoutAdmin>
           } />
 
+          <Route path="/admin/gerenciar-documentos" element={
+            <LayoutAdmin>
+              <GerenciarDocumentosPage />
+            </LayoutAdmin>
+          } />
+
           <Route path="/admin/usuarios" element={
             <LayoutAdmin>
               <UsuariosAdminPage />
@@ -68,12 +74,6 @@ const App = () => {
           <Route path="/admin/portal" element={
             <LayoutAdmin>
               <AdminUsuarios />
-            </LayoutAdmin>
-          } />
-
-          <Route path="/admin/formulario" element={
-            <LayoutAdmin>
-              <UsuarioForm />
             </LayoutAdmin>
           } />
 

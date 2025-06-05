@@ -4,10 +4,9 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 const adminMenuItems = [
     { text: 'Início', path: '/admin/dashboard' },
-    { text: 'Documentos', path: '/admin/formulario' },
-    { text: 'Cadastrar Usuário', path: '/admin/usuarios/novo' },    
+    { text: 'Gerenciar Documentos', path: '/admin/gerenciar-documentos' },
+    { text: 'Cadastrar Usuário', path: '/admin/usuarios/novo' },
     { text: 'Usuários', path: '/admin/usuarios' },
-    { text: 'Portal', path: '/admin/portal' },
     { text: 'Relatórios', path: '/admin/relatorios' },
     { text: 'Configurações', path: '/admin/configuracoes' },
     { text: 'Sair', path: '/' },
